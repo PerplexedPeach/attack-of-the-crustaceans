@@ -28,7 +28,7 @@ func get_input_direction():
 
 
 func update_look_direction(direction):
-	$Pivot/Sprite.rotation = direction.angle() - PI/2 #fixing rotation of protag sprite
+	$Pivot/Sprite.rotation = direction.angle()
 
 
 func move_to(target_position):
