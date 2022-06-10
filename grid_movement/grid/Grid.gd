@@ -22,10 +22,10 @@ func request_move(pawn, direction):
 
 	var cell_tile_id = get_cellv(cell_target)
 	match cell_tile_id:
-		-1:
+		-1: #what does an invalid cell look like? just one not on the tilemap?
 			set_cellv(cell_target, CellType.ACTOR)
 			set_cellv(cell_start, -1)
-			return map_to_world(cell_target) + cell_size / 2
+			return map_to_world(cell_target) + cell_size / 2 #does this just target the cell you're in..?
 		CellType.OBJECT, CellType.ACTOR:
 			var target_pawn = get_cell_pawn(cell_target, cell_tile_id)
 			print("Cell %s contains %s" % [cell_target, target_pawn.name])
