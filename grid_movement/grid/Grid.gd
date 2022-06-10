@@ -9,3 +9,4 @@ func request_move(pawn, direction):
 	match cell_tile_id:
 		-1, 0:
 			return map_to_world(cell_target) + cell_size / 2
+
