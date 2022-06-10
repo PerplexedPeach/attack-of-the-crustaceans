@@ -13,8 +13,10 @@ script = ExtResource( 1 )
 anims/fade = SubResource( 1 )
 
 [node name="Exploration" parent="." instance=ExtResource( 3 )]
+position = Vector2( -8, -8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 230, 149 )
 anchor_mode = 0
 current = true
 zoom = Vector2( 0.267, 0.267 )
