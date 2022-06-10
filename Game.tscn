@@ -8,7 +8,6 @@ length = 0.5
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-exploration_screen = NodePath("Exploration")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade = SubResource( 1 )
@@ -16,5 +15,5 @@ anims/fade = SubResource( 1 )
 [node name="Exploration" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 640, 360 )
+offset = Vector2( 240, 135 )
 current = true
