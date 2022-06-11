@@ -23,7 +23,6 @@ func get_input_direction():
 	)
 
 
-
 func move_to(target_position):
 	set_process(false)
 	$AnimationPlayer.play("walk")

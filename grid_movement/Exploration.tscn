@@ -64,7 +64,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Tiles" instance=ExtResource( 4 )]
-position = Vector2( 352, 240 )
+position = Vector2( 360, 248 )
 
 [node name="Grid" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )
