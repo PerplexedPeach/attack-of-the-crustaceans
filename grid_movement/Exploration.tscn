@@ -67,7 +67,7 @@ __meta__ = {
 position = Vector2( 360, 248 )
 
 [node name="Grid" type="TileMap" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
+modulate = Color( 1, 1, 1, 0.313726 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
