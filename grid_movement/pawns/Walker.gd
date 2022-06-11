@@ -1,9 +1,18 @@
+class_name Walker
 extends Pawn
 
 onready var parent = get_parent()
+export var movement_range = 2
+export var show_movement = false
+#export(PackedScene) var overlay
+
+var cell setget , _get_cell
+
+func _get_cell():
+	return parent.world_to_map(self.position)
 
 func _ready():
-	update_look_direction(Vector2.RIGHT)
+	update_look_direction(Vector2.DOWN)
 	
 func _process(_delta):
 	var input_direction = get_input_direction()
@@ -29,6 +38,8 @@ func get_input_direction():
 
 
 func move_to(target_position):
+	cell = target_position
+	print(cell)
 	set_process(false)
 	$AnimationPlayer.play("walk")
 	var move_direction = (position - target_position).normalized()
@@ -39,6 +50,9 @@ func move_to(target_position):
 	yield($AnimationPlayer, "animation_finished")
 
 	set_process(true)
+	if show_movement: # and overlay:
+		var cells = parent.get_walkable_cells(self)
+#		overlay.draw(cells)
 
 
 func bump():

@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "TileMap",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://grid_movement/grid/Grid.gd"
+}, {
+"base": "TileMap",
+"class": "Overlay",
+"language": "GDScript",
+"path": "res://grid_movement/Overlay.gd"
+}, {
 "base": "Node2D",
 "class": "Pawn",
 "language": "GDScript",
 "path": "res://grid_movement/pawns/Pawn.gd"
+}, {
+"base": "Pawn",
+"class": "Walker",
+"language": "GDScript",
+"path": "res://grid_movement/pawns/Walker.gd"
 } ]
 _global_script_class_icons={
-"Pawn": ""
+"Grid": "",
+"Overlay": "",
+"Pawn": "",
+"Walker": ""
 }
 
 [application]
