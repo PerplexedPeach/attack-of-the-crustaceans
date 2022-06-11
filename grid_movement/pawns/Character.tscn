@@ -77,4 +77,5 @@ anims/walk = SubResource( 2 )
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
+position = Vector2( 8, 8 )
 texture = ExtResource( 2 )
