@@ -8,11 +8,17 @@ enum TileAction {WALK, SQUASH}
 
 func request_move(pawn, direction):
 	# TODO add movement onto an enemy for destroying them
-	var cell_start = world_to_map(pawn.position)
+	var cell_start = calculate_grid_coordinates(pawn.position)
 	var cell_target = cell_start + direction
 	if is_walkable(cell_target):
-		return map_to_world(cell_target) + cell_size / 2
-
+		return calculate_map_position(cell_target)
+		
+func calculate_grid_coordinates(map_position: Vector2) -> Vector2:
+	return world_to_map(map_position)
+	
+func calculate_map_position(grid_position: Vector2) -> Vector2:
+	return map_to_world(grid_position) + cell_size / 2
+	
 func is_walkable(cell_target):
 	var cell_tile_id = get_cellv(cell_target)
 	match cell_tile_id:
