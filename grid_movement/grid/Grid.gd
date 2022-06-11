@@ -10,7 +10,6 @@ func request_move(pawn, direction):
 	# TODO add movement onto an enemy for destroying them
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
-
 	if is_walkable(cell_target):
 		return map_to_world(cell_target) + cell_size / 2
 

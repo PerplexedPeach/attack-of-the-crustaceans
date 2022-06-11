@@ -4,7 +4,8 @@ extends Pawn
 onready var parent = get_parent()
 export var movement_range = 2
 export var show_movement = false
-#export(PackedScene) var overlay
+export(NodePath) var overlay_path
+onready var overlay = get_node_or_null(overlay_path)
 
 var cell setget , _get_cell
 
@@ -13,6 +14,7 @@ func _get_cell():
 
 func _ready():
 	update_look_direction(Vector2.DOWN)
+	show_movement()
 	
 func _process(_delta):
 	var input_direction = get_input_direction()
@@ -39,7 +41,6 @@ func get_input_direction():
 
 func move_to(target_position):
 	cell = target_position
-	print(cell)
 	set_process(false)
 	$AnimationPlayer.play("walk")
 	var move_direction = (position - target_position).normalized()
@@ -47,13 +48,16 @@ func move_to(target_position):
 	$Pivot/Sprite.position = position - target_position
 	position = target_position
 
+	show_movement()
 	yield($AnimationPlayer, "animation_finished")
-
 	set_process(true)
-	if show_movement: # and overlay:
-		var cells = parent.get_walkable_cells(self)
-#		overlay.draw(cells)
 
+
+func show_movement():
+	if show_movement and overlay:
+		var cells = parent.get_walkable_cells(self)
+		print("movable cells %s" % cells.size())
+		overlay.draw(cells)
 
 func bump():
 	$AnimationPlayer.play("bump")
