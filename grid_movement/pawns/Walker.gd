@@ -2,11 +2,14 @@ extends Pawn
 
 onready var parent = get_parent()
 
-
+func _ready():
+	update_look_direction(Vector2.RIGHT)
+	
 func _process(_delta):
 	var input_direction = get_input_direction()
 	if not input_direction:
 		return
+	update_look_direction(input_direction)
 
 	var target_position = parent.request_move(self, input_direction)
 	if target_position:
@@ -15,7 +18,9 @@ func _process(_delta):
 	else:
 		bump()
 
-
+func update_look_direction(direction):
+	$Pivot/Sprite.rotation = direction.angle() - PI/2
+	
 func get_input_direction():
 	return Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
