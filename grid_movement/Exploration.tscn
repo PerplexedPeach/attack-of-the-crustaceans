@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/tiles.png" type="Texture" id=1]
 [ext_resource path="res://sprites/grid.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/squash.png" type="Texture" id=7]
 [ext_resource path="res://grid_movement/pawns/Unit.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sprites/seabunny.png" type="Texture" id=9]
+[ext_resource path="res://Cursor.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "sand"
@@ -101,6 +102,7 @@
 0/z_index = 0
 
 [node name="Exploration" type="YSort"]
+sort_enabled = false
 
 [node name="Tiles" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -126,6 +128,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 script = ExtResource( 5 )
 
 [node name="Grid" type="TileMap" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.313726 )
 tile_set = SubResource( 3 )
 cell_size = Vector2( 16, 16 )
@@ -136,3 +139,6 @@ tile_data = PoolIntArray( -720912, 0, 0, -720911, 0, 0, -720910, 0, 0, -720909, 
 grid_path = NodePath("../Tiles")
 skin = ExtResource( 9 )
 move_speed = 100.0
+
+[node name="Cursor" parent="." instance=ExtResource( 10 )]
+grid_path = NodePath("../Tiles")

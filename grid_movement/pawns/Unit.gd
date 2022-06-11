@@ -68,20 +68,12 @@ func _ready() -> void:
 	set_process(false)
 
 	self.cell = grid.calculate_grid_coordinates(self.position)
-#	position = grid.calculate_map_position(cell)
+	position = grid.calculate_map_position(cell)
 
 	if not Engine.editor_hint:
 		# We create the curve resource here because creating it in the editor prevents us from
 		# moving the unit.
 		curve = Curve2D.new()
-		
-	var points := [
-		Vector2(2, 2),
-		Vector2(2, 5),
-		Vector2(8, 5),
-		Vector2(8, 7),
-	]
-	walk_along(PoolVector2Array(points))
 
 # When active, moves the unit along its `curve` with the help of the PathFollow2D node.
 func _process(delta: float) -> void:

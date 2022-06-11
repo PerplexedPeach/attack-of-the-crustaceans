@@ -10,7 +10,7 @@ onready var overlay = get_node_or_null(overlay_path)
 var cell setget , _get_cell
 
 func _get_cell():
-	return parent.world_to_map(self.position)
+	return parent.calculate_grid_coordinates(self.position)
 
 func _ready():
 	update_look_direction(Vector2.DOWN)
