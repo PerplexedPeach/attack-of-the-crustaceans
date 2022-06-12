@@ -20,6 +20,8 @@ var cell := Vector2.ZERO setget set_cell
 # Through its setter function, the `_is_walking` property toggles processing for this unit.
 # See `_set_is_walking()` at the bottom of this code snippet.
 var _is_walking := false setget _set_is_walking
+var is_selected := false setget set_is_selected
+
 
 onready var _sprite: Sprite = $PathFollow2D/Sprite
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
@@ -50,16 +52,6 @@ func set_skin_offset(value: Vector2) -> void:
 	if not _sprite:
 		yield(self, "ready")
 	_sprite.position = value
-
-
-func _set_is_walking(value: bool) -> void:
-	_is_walking = value
-	set_process(_is_walking)
-
-# Emitted when the unit reached the end of a path along which it was walking.
-# We'll use this to notify the game board that a unit reached its destination and we can let the
-# player select another unit.
-signal walk_finished
 
 
 func _ready() -> void:
@@ -113,3 +105,18 @@ func walk_along(path: PoolVector2Array) -> void:
 	# `_set_is_walking()` below.
 	self._is_walking = true
 
+func set_is_selected(value: bool) -> void:
+	is_selected = value
+	if is_selected:
+		_anim_player.play("walk")
+	else:
+		_anim_player.play("idle")
+
+func _set_is_walking(value: bool) -> void:
+	_is_walking = value
+	set_process(_is_walking)
+
+# Emitted when the unit reached the end of a path along which it was walking.
+# We'll use this to notify the game board that a unit reached its destination and we can let the
+# player select another unit.
+signal walk_finished

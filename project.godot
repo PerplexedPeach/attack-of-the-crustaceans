@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Cursor.gd"
 }, {
+"base": "Node2D",
+"class": "GameBoard",
+"language": "GDScript",
+"path": "res://grid_movement/GameBoard.gd"
+}, {
 "base": "TileMap",
 "class": "Grid",
 "language": "GDScript",
@@ -23,6 +28,11 @@ _global_script_classes=[ {
 "class": "Overlay",
 "language": "GDScript",
 "path": "res://grid_movement/Overlay.gd"
+}, {
+"base": "Reference",
+"class": "PathFinder",
+"language": "GDScript",
+"path": "res://pathfinder.gd"
 }, {
 "base": "Node2D",
 "class": "Pawn",
@@ -34,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://grid_movement/pawns/Unit.gd"
 }, {
+"base": "TileMap",
+"class": "UnitPath",
+"language": "GDScript",
+"path": "res://grid_movement/UnitPath.gd"
+}, {
 "base": "Pawn",
 "class": "Walker",
 "language": "GDScript",
@@ -41,10 +56,13 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Cursor": "",
+"GameBoard": "",
 "Grid": "",
 "Overlay": "",
+"PathFinder": "",
 "Pawn": "",
 "Unit": "",
+"UnitPath": "",
 "Walker": ""
 }
 

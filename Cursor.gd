@@ -35,12 +35,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# If the user moves the mouse, we capture that input and update the node's cell in priority.
 	if event is InputEventMouseMotion:
-		var local_pos = get_viewport().canvas_transform.affine_inverse().xform(event.position)
-		# keep cursor inside the grid when half cell size out
-		local_pos += Vector2.ONE * grid.cell_size / 2
-
+		var local_pos = grid.event_position_to_viewport(event.position)
 		self.cell = grid.calculate_grid_coordinates(local_pos)
-#		self.cell = grid.calculate_grid_coordinates(event.position)
 	# If we are already hovering the cell and click on it, or we press the enter key, the player
 	# wants to interact with that cell.
 	elif event.is_action_pressed("click") or event.is_action_pressed("ui_accept"):
@@ -93,6 +89,6 @@ func set_cell(value: Vector2) -> void:
 	# cooldown timer that will limit the rate at which the cursor moves when we keep the direction
 	# key down.
 	position = grid.calculate_map_position(cell)
-	print("should be drawing at cell %s position %s" % [cell, position])
+#	print("should be drawing at cell %s position %s" % [cell, position])
 	emit_signal("moved", cell)
 	_timer.start()

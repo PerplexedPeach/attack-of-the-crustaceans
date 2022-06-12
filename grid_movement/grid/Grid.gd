@@ -1,9 +1,6 @@
 extends TileMap
 class_name Grid
 
-# mapping coordinates of a cell to enemies
-var enemies = {}
-const DIRECTIONS = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 enum TileAction {WALK, SQUASH}
 
 func request_move(pawn, direction):
@@ -13,6 +10,12 @@ func request_move(pawn, direction):
 	if is_walkable(cell_target):
 		return calculate_map_position(cell_target)
 		
+func event_position_to_viewport(position: Vector2, apply_half_offset=true) -> Vector2:
+	var pos = get_viewport().canvas_transform.affine_inverse().xform(position)
+	if apply_half_offset:
+		pos += Vector2.ONE * cell_size / 2
+	return pos
+	
 func calculate_grid_coordinates(map_position: Vector2) -> Vector2:
 	return world_to_map(map_position)
 	
@@ -25,39 +28,9 @@ func is_walkable(cell_target):
 		-1, 0:
 			return true
 	return false
-	
-# Returns an array of cells a given walker can navigate
-func get_walkable_cells(walker: Walker) -> Array:
-	return _flood_fill(walker.cell, walker.movement_range)
 
-# Returns an array with all the coordinates of walkable cells based on the `max_distance`.
-func _flood_fill(cell: Vector2, max_distance: int) -> Array:
-	var visited = {}
-	# DFS
-	var stack = [cell]
-	while not stack.empty():
-		var current = stack.pop_back()
-
-		if visited.get(current) != null:
-			continue
-
-		# limit by manhattan distance
-		var difference: Vector2 = (current - cell).abs()
-		var distance := int(difference.x + difference.y)
-		if distance > max_distance:
-			continue
-
-		# TODO add SQUASH action if that cell belongs to an enemy
-		# but don't stack that for more filling because we cannot move past them
-		visited[current] = TileAction.WALK
-		
-		for direction in DIRECTIONS:
-			var coordinates: Vector2 = current + direction
-			if not is_walkable(coordinates):
-				continue
-			if visited.get(coordinates) != null:
-				continue
-
-			# This is where we extend the stack.
-			stack.append(coordinates)
-	return visited
+# Given Vector2 coordinates, calculates and returns the corresponding integer index. You can use
+# this function to convert 2D coordinates to a 1D array's indices.
+func as_index(cell: Vector2) -> int:
+	var offset = get_used_rect()
+	return int(cell.x - offset.position.x + offset.size.x * (cell.y - offset.position.y))
