@@ -31,6 +31,7 @@ func _ready() -> void:
 	_reinitialize()
 	# This call is temporary, remove it after testing and seeing the overlay works as expected.
 #	_unit_overlay.draw(get_actionable_cells($Unit))
+	_select_unit($Unit.cell)
 
 func cell_to_action(cell: Vector2):
 	var unit = _units.get(cell)
@@ -131,12 +132,12 @@ func _move_active_unit(new_cell: Vector2) -> void:
 	_deselect_active_unit()
 	# We then ask the unit to walk along the path stored in the UnitPath instance and wait until it
 	# finished.
-	print("walking to %s" % new_cell)
 	_active_unit.walk_along(_unit_path.current_path)
 	yield(_active_unit, "walk_finished")
-	print("walk finished to %s" % new_cell)
 	# Finally, we clear the `_active_unit`, which also clears the `_walkable_cells` array.
 	_clear_active_unit()
+	# always have the player character selected
+	_select_unit($Unit.cell)
 
 
 func _on_Cursor_moved(new_cell: Vector2) -> void:
@@ -152,10 +153,8 @@ func _on_Cursor_accept_pressed(cell: Vector2) -> void:
 	# on the board's current state, this interaction means either that we want to select a unit all
 	# that we want to give it a move order.
 	if not _active_unit:
-		print("select %s" % cell)
 		_select_unit(cell)
 	elif _active_unit.is_selected:
-		print("move to %s" % cell)
 		_move_active_unit(cell)
 	else:
 		print("shouldn't happen click state at %s" % cell)
